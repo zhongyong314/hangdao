@@ -3,6 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jinglin.zy.dao.impl.SupplierDao">
+
+     <select id="getmodel" resultType="Supplier">
+        select * from supplier where id=#{id}
+     </select>
 	 <select id="getlist" parameterType="Map" resultType="Supplier">
 	    select * from supplier
 	    <where>

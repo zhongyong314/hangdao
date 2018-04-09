@@ -10,4 +10,5 @@ public interface SupplierService {
    int updateitem(Supplier supplier);
    List<Supplier> getsupplierlist(Map<String,Object> map);
    int getcount(Map<String,Object> map);
+   Supplier getsupplierone(Integer id);
 }

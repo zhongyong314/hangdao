@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,10 +30,7 @@ import net.sf.json.JSONObject;
 @RequestMapping(value="/supplier")
 public class SupplierController {
    @RequestMapping("/show")
-   public String show(HttpSession session) {
-	   if(session.getAttribute("name")==null) {
-		   session.setAttribute("name",Math.random());
-	   }
+   public String show() {
 	   return "supplier";
 	   
    }
@@ -66,6 +64,9 @@ public class SupplierController {
 	   if(supplier.getSupname()!=null) {
 		   map.put("supname", supplier.getSupname());
 	   }
+	   if(supplier.getEmail()!=null) {
+		   map.put("email", supplier.getEmail());
+	   }
 	   //.......
 	   map.put("pageindex", (pageindex-1)*pagesize);//起始行号
 	   map.put("pagesize", pagesize);
@@ -81,6 +82,19 @@ public class SupplierController {
 	   jsonobject.put("pagecount",pagecount);//总的页数
 	   jsonobject.put("currenpage", pageindex);//当前页
 		try {
+			ResponseUtil.write(response, jsonobject);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   }
+   
+   @RequestMapping(value="/updatesupplier",method=RequestMethod.GET)
+   public void updatesupplier(@RequestParam("id")Integer id,HttpServletResponse response) {
+	   Supplier supplier = supplierService.getsupplierone(id);
+	 
+	   JSONObject jsonobject = JSONObject.fromObject(supplier);
+	   try {
 			ResponseUtil.write(response, jsonobject);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -26,6 +26,8 @@ public class SupplierServiceImpl implements SupplierService {
 		return supplierDao.updateitem(supplier);
 	}
 
+	
+	
 	@Override
 	public List<Supplier> getsupplierlist(Map<String, Object> map) {
 		return supplierDao.getlist(map);
@@ -34,5 +36,10 @@ public class SupplierServiceImpl implements SupplierService {
 	@Override
 	public int getcount(Map<String, Object> map) {
 		return supplierDao.getcount(map);
+	}
+
+	@Override
+	public Supplier getsupplierone(Integer id) {
+		return supplierDao.getmodel(id);
 	}
 }

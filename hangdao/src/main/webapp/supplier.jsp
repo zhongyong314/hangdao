@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
   <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css" />
   <!--[if IE 7]>
@@ -41,7 +42,7 @@
       </div>
     </div>
 </form>
-    session值:${sessionScope.name}
+
     <div class="Manager_style">
      <span class="title_name">供应商信息</span>
      <table  id="tcontent" class="table table-striped table-bordered table-hover">
@@ -182,7 +183,7 @@ $(function () {
             type: "post",
             data: "pagesize=5",
             success: function (data) {
-                   var listdata = eval("(" + data + ")").result;
+                   var listdata = eval("(" + data + ")").result;//得到集合数据
                    PackagData(listdata);
             	
                     var pageCount = eval("(" + data + ")").pagecount; //取到pageCount的值(把返回数据转成object类型)
@@ -253,6 +254,23 @@ function PackagData(res){
 }  
 function updateitem(id){
 	//需要从后台把数据提取之后填充到页面
+	
+	 var spath = "${pageContext.request.contextPath}/supplier/updatesupplier?id="+id;
+	 
+	 $.ajax({
+            url: spath,
+            datatype: 'json',
+            type: "get",
+            success:function(data){
+            	  /* alert(data.supname);
+            	  $("input[name='supname']").val(data.supname); */
+            	  var data = eval("(" + data + ")")
+            	     $("input[name='supname']").val(data.supname);
+            	     //......
+            	}
+            });
+	
+	
 	layer.open({
 		type : 1,
 		title : '修改供应商',
