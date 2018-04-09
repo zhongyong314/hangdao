@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinglin.zy.dao.impl.SupplierDao">
+	 <select id="getlist" parameterType="Map" resultType="Supplier">
+	    select * from supplier
+	    <where>
+	       <if test="id!=null and id>0 ">
+	         and id=#{id}
+	       </if>
+	       <if test="supname!=null and supname!=''">
+	         and supname=#{supname}
+	       </if>
+	       <if test="personname!=null and personname!=''">
+	         and personname=#{personname}
+	       </if>
+	       <if test="tel!=null and tel!=''">
+	         and tel=#{tel}
+	       </if>
+	       <if test="email!=null and email!=''">
+	         and email=#{email}
+	       </if>
+	       <if test="remark!=null and remark!=''">
+	         and remark=#{remark}
+	       </if>
+	     
+	    </where>
+	      <if test="pageindex!=null and pagesize!=null">
+	         limit #{pageindex},#{pagesize} 
+	       </if>
+	 </select>
+	 <insert id="additem" keyColumn="id" keyProperty="id" useGeneratedKeys="true"  parameterType="Supplier">
+       insert into supplier
+       <trim prefix="("  suffixOverrides=",">
+           <if test="supname!=null">
+              supname,
+           </if>
+           <if test="personname!=null">
+              personname,
+           </if>
+           <if test="tel!=null">
+              tel,
+           </if>
+           <if test="email!=null">
+             email,
+           </if>
+            <if test="remark!=null">
+             remark,
+           </if>
+       </trim>
+       <trim prefix=")values("  suffixOverrides=",">
+            <if test="supname!=null">
+              #{supname},
+           </if>
+           <if test="personname!=null">
+              #{personname},
+           </if>
+           <if test="tel!=null">
+              #{tel},
+           </if>
+           <if test="email!=null">
+             #{email},
+           </if>
+           <if test="remark!=null">
+             #{remark},
+           </if>
+       </trim>
+       )
+    </insert>
+    <update id="updateitem" parameterType="Supplier">
+        update supplier
+        <set>
+            <if test="supname!=null and supname!=''">
+	         supname=#{supname},
+	       </if>
+	       <if test="personname!=null and personname!=''">
+	         personname=#{personname},
+	       </if>
+	       <if test="tel!=null and tel!=''">
+	         tel=#{tel},
+	       </if>
+	       <if test="email!=null and email!=''">
+	        email=#{email},
+	       </if>
+	       <if test="remark!=null and remark!=''">
+	        remark=#{remark},
+	       </if>
+        </set>
+         where id=#{id}
+    </update>
+    <select id="getcount" parameterType="Map" resultType="int">
+         select count(1) from supplier
+	    <where>
+	       <if test="id!=null and id>0 ">
+	         and id=#{id}
+	       </if>
+	       <if test="supname!=null and supname!=''">
+	         and supname=#{supname}
+	       </if>
+	       <if test="personname!=null and personname!=''">
+	         and personname=#{personname}
+	       </if>
+	       <if test="tel!=null and tel!=''">
+	         and tel=#{tel}
+	       </if>
+	       <if test="email!=null and email!=''">
+	         and email=#{email}
+	       </if>
+	       <if test="remark!=null and remark!=''">
+	         and remark=#{remark}
+	       </if>
+	    </where>
+    </select>
+    
+</mapper> 
