@@ -38,7 +38,7 @@ public class SupplierController {
    }
 	
    public void testit() {
-	   
+	   System.out.println("hello");
    }
 	
 	
