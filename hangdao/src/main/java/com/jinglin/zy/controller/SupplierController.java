@@ -21,6 +21,10 @@ import com.jinglin.zy.util.ResponseUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+/**
+ * @author DELL
+ * 这是供应商信息
+ */
 @Controller
 @RequestMapping(value="/supplier")
 public class SupplierController {
@@ -30,8 +34,12 @@ public class SupplierController {
 		   session.setAttribute("name",Math.random());
 	   }
 	   return "supplier";
+	   
    }
 	
+   public void testit() {
+	   
+   }
 	
 	
 	
